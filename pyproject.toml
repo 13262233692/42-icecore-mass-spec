@@ -1,0 +1,70 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel", "pybind11>=2.11", "cmake>=3.24", "ninja"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "icecore-ms"
+version = "0.1.0"
+description = "Ice Core Isotope Abundance Tomography Kernel - High-throughput polar ice core mass spectrometry data processing"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    {name = "Polar Glaciology Research Team"}
+]
+license = {text = "MIT"}
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: C++",
+    "Topic :: Scientific/Engineering :: Atmospheric Science",
+    "Topic :: Scientific/Engineering :: Chemistry",
+    "Topic :: Scientific/Engineering :: Physics",
+]
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "xarray>=2023.6",
+    "dask>=2023.6",
+    "distributed>=2023.6",
+    "netCDF4>=1.6",
+    "h5netcdf>=1.2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+    "black>=23.7",
+    "ruff>=0.1",
+    "mypy>=1.5",
+]
+
+[project.urls]
+Homepage = "https://github.com/polar-glaciology/42-icecore-mass-spec"
+Repository = "https://github.com/polar-glaciology/42-icecore-mass-spec"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.extension]
+pybind11 = true
+cmake = "cpp"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-v --tb=short"
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+select = ["E", "F", "I", "N", "W"]
